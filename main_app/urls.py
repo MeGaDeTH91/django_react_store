@@ -1,8 +1,10 @@
 from django.urls import path
 
+from main_app.views.products import ListProductsView
+
 urlpatterns = [
-    # Home page
-    path('', index.home_page, name='home page'),
+    # Product urls
+    path('products', ListProductsView.as_view(), name='products-all'),
 
     # # Expense pages
     # path('create/', expenses.expense_create, name='create expense'),
