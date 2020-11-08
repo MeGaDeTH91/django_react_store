@@ -15,7 +15,7 @@ class HomePage extends Component {
   }
 
   getProducts = async () => {
-    const promise = await fetch(`http://localhost:8000/api/products/all`);
+    const promise = await fetch(`http://127.0.0.1:8000/api/products`);
 
     const products = await promise.json();
 
@@ -39,13 +39,14 @@ class HomePage extends Component {
               {this.state.products.map((x) => {
                 return (
                   <CardProduct
-                    key={x._id}
-                    productId={x._id}
+                    key={x.id}
+                    productId={x.id}
                     imageURL={x.imageURL}
                     title={x.title}
                     price={formatPrice(x.price)}
                     quantity={x.quantity}
-                    category={x.category}
+                    category_title={x.category_title}
+                    category_id={x.category}
                   ></CardProduct>
                 );
               })}

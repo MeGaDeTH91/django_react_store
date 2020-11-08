@@ -19,6 +19,9 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
+    class Meta:
+        default_related_name = 'products'
+
     def __str__(self):
         return self.title
 
