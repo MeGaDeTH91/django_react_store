@@ -1,5 +1,5 @@
 from django.urls import path
-from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
+from rest_framework_jwt.views import obtain_jwt_token
 
 from main_app.views.customer import current_user, CustomerList
 from main_app.views.products import ListProductsView
