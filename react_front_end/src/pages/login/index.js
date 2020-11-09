@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import NotificationContext from "../../NotificationContext";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const userContext = useContext(UserContext);
   const notifications = useContext(NotificationContext);
@@ -18,15 +18,15 @@ const LoginPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!email || !password) {
-      notifications.showMessage("Please provide email and password.", 'danger');
+    if (!username || !password) {
+      notifications.showMessage("Please provide username and password.", 'danger');
       return;
     }
 
     await authenticate(
-      "http://localhost:8000/api/users/login",
+      "http://127.0.0.1:8000/api/users/login/",
       {
-        email,
+        username,
         password,
       },
       (user) => {
@@ -49,10 +49,10 @@ const LoginPage = () => {
         <Title title="Login page" />
         <hr />
         <Input
-          id="email"
-          value={email}
-          label="Email"
-          onChange={(e) => setEmail(e.target.value)}
+          id="username"
+          value={username}
+          label="Username"
+          onChange={(e) => setUsername(e.target.value)}
         ></Input>
         <Input
           type="password"

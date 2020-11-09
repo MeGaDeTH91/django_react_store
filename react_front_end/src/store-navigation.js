@@ -24,7 +24,8 @@ import OrdersPage from "./pages/orders";
 const StoreNavigation = () => {
   const context = useContext(UserContext);
   const userIsLogged = context.user && context.user.loggedIn;
-  const admin = userIsLogged && context.user.isAdministrator;
+  const admin = userIsLogged && context.user.is_superuser;
+  console.log('CONTEXT: ', context)
 
   const authorizationSwitch = (requiredPrivilege, page, redirectRoute) => {
     return requiredPrivilege ? page : <Redirect to={`${redirectRoute}`} />;

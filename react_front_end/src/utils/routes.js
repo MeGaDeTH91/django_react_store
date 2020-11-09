@@ -80,7 +80,7 @@ const getNavigationRoutes = (user) => {
     return guestLinks;
   }
 
-  const isAdmin = user && user.isAdministrator;
+  const isAdmin = user && user.is_superuser;
 
   return isAdmin ? adminLinks : authLinks;
 };
