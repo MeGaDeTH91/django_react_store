@@ -24,6 +24,7 @@ const App = (props) => {
   };
 
   const logIn = (user) => {
+
     setUser({
       ...user,
       loggedIn: true,
@@ -42,34 +43,37 @@ const App = (props) => {
   useEffect(() => {
     const token = getCookie("x-auth-token");
 
-    if (!token) {
+    console.log(token)
+    if (!token) {      
       logOut();
       setLoading(false);
       return;
     }
-    fetch("http://localhost:8000/api/users/verify", {
+    
+    fetch("http://127.0.0.1:8000/api/users/verify/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: token,
+        Authorization: `JWT ${token}`,
       },
     })
       .then((promise) => {
-        return promise.json();
+        if (promise.status === 200) {
+          return promise.json();
+        }
       })
       .then((response) => {
-        if (response.status) {
-          logIn({
-            id: response.user._id,
-            email: response.user.email,
-            isAdministrator: response.user.isAdministrator,
-            isActive: response.user.isActive,
-          });
-        } else {
-          logOut();
-        }
+        logIn({
+          id: response.id,
+          username: response.username,
+          is_superuser: response.is_superuser,
+          is_active: response.is_active,
+        });
 
         setLoading(false);
+      })
+      .catch((err) => {
+        logOut();
       });
   }, []);
 
