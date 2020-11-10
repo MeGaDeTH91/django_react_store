@@ -27,8 +27,8 @@ class Product(models.Model):
 
 
 class Customer(AbstractUser):
-    phone = models.CharField(max_length=21)
-    delivery_address = models.CharField(max_length=80)
+    username = models.CharField(blank=False, max_length=50, unique=True)
+    address = models.CharField(max_length=80)
     cart = models.ManyToManyField(Product)
 
     def __str__(self):

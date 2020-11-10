@@ -10,7 +10,7 @@ urlpatterns = [
 
     path('users/login/', obtain_jwt_token),
     path('users/verify/', current_user),
-    path('users/all/', CustomerList.as_view())
+    path('users/register/', CustomerList.as_view())
 
     # # Expense pages
     # path('create/', expenses.expense_create, name='create expense'),
