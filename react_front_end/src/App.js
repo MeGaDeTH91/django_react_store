@@ -33,7 +33,7 @@ const App = (props) => {
 
   const logOut = () => {
     document.cookie =
-      "x-auth-token=; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+      "x-auth-token=; expires = Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
 
     setUser({
       loggedIn: false,
@@ -43,7 +43,6 @@ const App = (props) => {
   useEffect(() => {
     const token = getCookie("x-auth-token");
 
-    console.log(token)
     if (!token) {      
       logOut();
       setLoading(false);

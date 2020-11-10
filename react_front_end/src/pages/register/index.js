@@ -9,9 +9,11 @@ import { useHistory } from "react-router-dom";
 import NotificationContext from "../../NotificationContext";
 
 const RegisterPage = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [address, setAddress] = useState("");
   const [password, setPassword] = useState("");
   const [rePassword, setRePassword] = useState("");
 
@@ -22,8 +24,8 @@ const RegisterPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!email || !fullName || !password || !rePassword) {
-      notifications.showMessage('Email, full name, password and confirmation password should be more than 2 characters.', 'danger');
+    if (!username || !first_name || !last_name || !password || !rePassword) {
+      notifications.showMessage('Username, full name, password and confirmation password should be more than 2 characters.', 'danger');
       return;
     }
 
@@ -32,24 +34,43 @@ const RegisterPage = () => {
       return;
     }
 
-    await authenticate(
-      "http://localhost:8000/api/users/register",
-      {
+    const promise = await fetch("http://127.0.0.1:8000/api/users/register/", {
+      method: "POST",
+      body: JSON.stringify({
+        username,
         email,
-        fullName,
-        phone,
+        first_name,
+        last_name,
+        address,
         password,
         rePassword
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!promise.ok) {
+      notifications.showMessage('Please provide different username.', 'danger');
+      return;
+    }
+
+    await authenticate(
+      "http://127.0.0.1:8000/api/users/login/",
+      {
+        username,
+        password,
       },
       (user) => {
-        console.log("Registered successfully!");
+        console.log("Logged in successfully!");
 
         context.logIn(user);
+        notifications.showMessage("Logged in successfully!", 'success');
         history.push("/");
       },
       (error) => {
-        console.log("Error", error);
-        notifications.showMessage('Email, full name, password and confirmation password should be more than 2 characters.', 'danger');
+        notifications.showMessage("Invalid credentials!", 'danger');
+        history.push("/login");
       }
     );
   };
@@ -60,22 +81,34 @@ const RegisterPage = () => {
         <Title title="Register page" />
         <hr />
         <Input
+          id="username"
+          value={username}
+          label="Username"
+          onChange={(e) => setUsername(e.target.value)}
+        ></Input>
+        <Input
           id="email"
           value={email}
           label="Email"
           onChange={(e) => setEmail(e.target.value)}
         ></Input>
         <Input
-          id="fullName"
-          value={fullName}
-          label="Full Name"
-          onChange={(e) => setFullName(e.target.value)}
+          id="first_name"
+          value={first_name}
+          label="First name"
+          onChange={(e) => setFirstName(e.target.value)}
         ></Input>
         <Input
-          id="phone"
-          value={phone}
-          label="Phone"
-          onChange={(e) => setPhone(e.target.value)}
+          id="last_name"
+          value={last_name}
+          label="Last name"
+          onChange={(e) => setLastName(e.target.value)}
+        ></Input>
+        <Input
+          id="address"
+          value={address}
+          label="Address"
+          onChange={(e) => setAddress(e.target.value)}
         ></Input>
         <Input
           type="password"

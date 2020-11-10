@@ -26,12 +26,22 @@ class CustomerSerializerWithToken(serializers.ModelSerializer):
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
+        first_name = validated_data.pop('first_name', None)
+        last_name = validated_data.pop('last_name', None)
+        email = validated_data.pop('email', None)
+        address = validated_data.pop('address', None)
         instance = self.Meta.model(**validated_data)
-        if password is not None:
+
+        if password is not None and first_name is not None and last_name is not None and \
+                email is not None and address is not None:
             instance.set_password(password)
+            instance.first_name = first_name
+            instance.last_name = last_name
+            instance.email = email
+            instance.address = address
         instance.save()
         return instance
 
     class Meta:
         model = Customer
-        fields = ('token', 'username', 'password')
+        fields = ('token', 'username', 'id', 'password', 'email', 'address', 'first_name', 'last_name')
