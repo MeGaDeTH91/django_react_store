@@ -37,7 +37,7 @@ const TableRow = ({ user, index }) => {
 
   const toggleRole = async () => {
     await executeAuthRequest(
-      `http://localhost:8000/api/users/changeRole?id=${user._id}`,
+      `http://127.0.0.1:8000/api/users/changeRole?id=${user._id}`,
       "PUT",
       {},
       (usersResponse) => {
@@ -56,7 +56,7 @@ const TableRow = ({ user, index }) => {
 
   const toggleStatus = async () => {
     await executeAuthRequest(
-      `http://localhost:8000/api/users/changeStatus?id=${user._id}`,
+      `http://127.0.0.1:8000/api/users/changeStatus?id=${user._id}`,
       "PUT",
       {},
       (usersResponse) => {

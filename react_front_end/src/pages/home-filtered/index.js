@@ -15,7 +15,7 @@ class HomeFilteredPage extends Component {
   }
 
   getProducts = async (searchParam) => {
-    const promise = await fetch(`http://localhost:8000/api/products/all`);
+    const promise = await fetch(`http://127.0.0.1:8000/api/products/all`);
 
     const productsResult = await promise.json();
 

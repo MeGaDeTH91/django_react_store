@@ -40,7 +40,7 @@ const EditCategoryPage = () => {
 
   const getCategory = useCallback(async () => {
     const response = await fetch(
-      `http://localhost:8000/api/categories/category?id=${params.id}`
+      `http://127.0.0.1:8000/api/categories/category?id=${params.id}`
     );
 
     if (!response.ok) {
@@ -82,7 +82,7 @@ const EditCategoryPage = () => {
     }
 
     await executeAuthRequest(
-      `http://localhost:8000/api/categories/category?id=${params.id}`,
+      `http://127.0.0.1:8000/api/categories/category?id=${params.id}`,
       "PUT",
       {
         title,

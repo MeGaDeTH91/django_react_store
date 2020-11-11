@@ -17,7 +17,7 @@ const ShoppingCartPage = () => {
 
   const getUserCart = async () => {
     await executeAuthGetRequest(
-      `http://localhost:8000/api/orders/user-cart?userId=${userContext.user.id}`,
+      `http://127.0.0.1:8000/api/orders/user-cart?userId=${userContext.user.id}`,
       (userCart) => {
         setCart(userCart);
       },
@@ -30,7 +30,7 @@ const ShoppingCartPage = () => {
 
   const submitOrder = async () => {
     await executeAuthRequest(
-      `http://localhost:8000/api/orders/create-order?userId=${userContext.user.id}`,
+      `http://127.0.0.1:8000/api/orders/create-order?userId=${userContext.user.id}`,
       "POST",
       {
         userId: userContext.user.id

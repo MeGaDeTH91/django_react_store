@@ -14,11 +14,13 @@ const UsersPage = () => {
 
   const getUsers = async () => {
     await executeAuthGetRequest(
-      `http://localhost:8000/api/users/all`,
+      `http://127.0.0.1:8000/api/users/all`,
       (usersResponse) => {
+        console.log('HERE: ', usersResponse);
         setUsers(usersResponse);
       },
       (error) => {
+        console.log('HERE ERROR: ', error);
         notifications.showMessage(error, "danger");
         history.push("/users");
       }

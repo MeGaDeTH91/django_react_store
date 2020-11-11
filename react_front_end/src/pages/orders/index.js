@@ -15,7 +15,7 @@ const OrdersPage = () => {
 
   const getUserInfo = async () => {
     await executeAuthGetRequest(
-      `http://localhost:8000/api/orders/user-orders?userId=${userContext.user.id}`,
+      `http://127.0.0.1:8000/api/orders/user-orders?userId=${userContext.user.id}`,
       (ordersResponse) => {
         if (ordersResponse && ordersResponse.length) {
           setOrders(

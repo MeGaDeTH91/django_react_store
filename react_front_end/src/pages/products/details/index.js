@@ -26,7 +26,7 @@ class ProductDetailsPage extends Component {
 
   getProduct = async (productId) => {
     const response = await fetch(
-      `http://localhost:8000/api/products/product?id=${productId}`
+      `http://127.0.0.1:8000/api/products/product?id=${productId}`
     );
 
     if (!response.ok) {
@@ -57,7 +57,7 @@ class ProductDetailsPage extends Component {
     const userId = this.context.user.id;
 
     await executeAuthRequest(
-      `http://localhost:8000/api/orders/add-to-cart?productId=${productId}`,
+      `http://127.0.0.1:8000/api/orders/add-to-cart?productId=${productId}`,
       "POST",
       {
         productId,
@@ -120,7 +120,7 @@ class ProductDetailsPage extends Component {
     e.preventDefault();
 
     await executeAuthRequest(
-      `http://localhost:8000/api/reviews/create?id=${this.state.product._id}`,
+      `http://127.0.0.1:8000/api/reviews/create?id=${this.state.product._id}`,
       "POST",
       {
         content: this.state.review,

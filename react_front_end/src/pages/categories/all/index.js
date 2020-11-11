@@ -14,7 +14,7 @@ class CategoriesPage extends Component {
   }
 
   getCategories = async () => {
-    const promise = await fetch(`http://localhost:8000/api/categories/all`);
+    const promise = await fetch(`http://127.0.0.1:8000/api/categories/all/`);
 
     const categories = await promise.json();
 
