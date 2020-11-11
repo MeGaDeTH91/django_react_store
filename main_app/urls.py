@@ -1,16 +1,23 @@
 from django.urls import path
 from rest_framework_jwt.views import obtain_jwt_token
 
-from main_app.views.customer import current_user, CustomerList
+from main_app.views.categories import ListCategoriesView
+from main_app.views.customer import authenticate_user, CustomerList, get_all_users
 from main_app.views.products import ListProductsView
 
 urlpatterns = [
-    # Product urls
-    path('products/', ListProductsView.as_view(), name='products-all'),
-
+    # User urls
     path('users/login/', obtain_jwt_token),
-    path('users/verify/', current_user),
-    path('users/register/', CustomerList.as_view())
+    path('users/verify/', authenticate_user),
+    path('users/all/', get_all_users),
+    path('users/register/', CustomerList.as_view()),
+
+    # Product urls
+    path('products/all/', ListProductsView.as_view(), name='products-all'),
+
+    # Category urls
+    path('categories/all/', ListCategoriesView.as_view(), name='categories-all'),
+
 
     # # Expense pages
     # path('create/', expenses.expense_create, name='create expense'),

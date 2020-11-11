@@ -46,7 +46,7 @@ const CreateCategoryPage = () => {
       return;
     }
 
-    await executeAuthRequest("http://localhost:8000/api/categories/create", 
+    await executeAuthRequest("http://127.0.0.1:8000/api/categories/create", 
       "POST",
       {
         title,

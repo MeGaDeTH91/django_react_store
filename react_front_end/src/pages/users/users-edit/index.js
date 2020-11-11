@@ -32,7 +32,7 @@ const EditUserPage = () => {
     }
 
     await executeAuthRequest(
-      `http://localhost:8000/api/users/user?id=${userContext.user.id}`,
+      `http://127.0.0.1:8000/api/users/user?id=${userContext.user.id}`,
       "PUT",
       {
         fullName,
@@ -54,7 +54,7 @@ const EditUserPage = () => {
 
   const getUser = useCallback(async () => {
     await executeAuthGetRequest(
-      `http://localhost:8000/api/users/user?id=${userContext.user.id}`,
+      `http://127.0.0.1:8000/api/users/user?id=${userContext.user.id}`,
       (user) => {
         setEmail(user.email);
         setFullName(user.fullName);

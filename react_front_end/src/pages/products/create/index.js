@@ -41,7 +41,7 @@ const CreateProductPage = () => {
   };
 
   const getCategories = useCallback(async () => {
-    const response = await fetch(`http://localhost:8000/api/categories/all`);
+    const response = await fetch(`http://127.0.0.1:8000/api/categories/all`);
 
     if (!response.ok) {
       notifications.showMessage("Error occured.", "danger");
@@ -86,7 +86,7 @@ const CreateProductPage = () => {
     }
 
     await executeAuthRequest(
-      "http://localhost:8000/api/products/create",
+      "http://127.0.0.1:8000/api/products/create",
       "POST",
       {
         title,

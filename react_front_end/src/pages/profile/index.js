@@ -18,7 +18,7 @@ const ProfilePage = () => {
 
   const getUserInfo = async () => {
     await executeAuthGetRequest(
-      `http://localhost:8000/api/users/user?id=${userContext.user.id}`,
+      `http://127.0.0.1:8000/api/users/user?id=${userContext.user.id}`,
       (usersResponse) => {
         setUser(usersResponse);
 
