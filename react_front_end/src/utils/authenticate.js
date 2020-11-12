@@ -14,7 +14,7 @@ const authenticate = async (url, body, onSuccess, onFailure) => {
     if (!promise.ok) {
       onFailure(`Error occured: ${response}`);
     } else if (response.user.username && response.user.is_active && authToken) {
-      document.cookie = `x-auth-token=${authToken}; SameSite=None; Secure`;
+      document.cookie = `x-auth-token=${authToken};`;
       onSuccess({
         username: response.user.username,
         is_superuser: response.user.is_superuser,
