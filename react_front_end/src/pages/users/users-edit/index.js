@@ -12,9 +12,11 @@ import executeAuthRequest from "../../../utils/executeAuthRequest";
 import UserContext from "../../../UserContext";
 
 const EditUserPage = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [fullName, setFullName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [first_name, setFirstName] = useState("");
+  const [last_name, setLastName] = useState("");
+  const [address, setAddress] = useState("");
 
   const notifications = useContext(NotificationContext);
   const userContext = useContext(UserContext);
@@ -23,7 +25,7 @@ const EditUserPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!fullName) {
+    if (!first_name || !last_name) {
       notifications.showMessage(
         "Please provide full name.",
         "danger"
@@ -32,11 +34,13 @@ const EditUserPage = () => {
     }
 
     await executeAuthRequest(
-      `http://127.0.0.1:8000/api/users/user?id=${userContext.user.id}`,
+      `http://127.0.0.1:8000/api/profile-edit/${userContext.user.id}/`,
       "PUT",
       {
-        fullName,
-        phone
+        email,
+        first_name,
+        last_name,
+        address
       },
       (user) => {
         notifications.showMessage("User information updated successfully!", "success");
@@ -54,11 +58,13 @@ const EditUserPage = () => {
 
   const getUser = useCallback(async () => {
     await executeAuthGetRequest(
-      `http://127.0.0.1:8000/api/users/user?id=${userContext.user.id}`,
+      `http://127.0.0.1:8000/api/profile-edit/${userContext.user.id}/`,
       (user) => {
+        setUsername(user.username);
         setEmail(user.email);
-        setFullName(user.fullName);
-        setPhone(user.phone);
+        setFirstName(user.first_name);
+        setLastName(user.last_name);
+        setAddress(user.address);
       },
       (error) => {
         notifications.showMessage(error, "danger");
@@ -83,18 +89,25 @@ const EditUserPage = () => {
       <RegisterForm onSubmit={handleSubmit}>
         <Title title="Update user info" />
         <hr />
-        <DisabledInput id="email" value={email || ''} label="Email"></DisabledInput>
+        <DisabledInput id="username" value={username || ''} label="Username"></DisabledInput>
+        <Input id="email" value={email || ''} label="Email" onChange={(e) => setEmail(e.target.value)}></Input>
         <Input
-          id="fullName"
-          value={fullName  || ''}
-          label="Full Name"
-          onChange={(e) => setFullName(e.target.value)}
+          id="first_name"
+          value={first_name  || ''}
+          label="First Name"
+          onChange={(e) => setFirstName(e.target.value)}
         ></Input>
         <Input
-          id="phone"
-          value={phone  || ''}
-          label="Phone"
-          onChange={(e) => setPhone(e.target.value)}
+          id="last_name"
+          value={last_name  || ''}
+          label="Last Name"
+          onChange={(e) => setLastName(e.target.value)}
+        ></Input>
+        <Input
+          id="address"
+          value={address  || ''}
+          label="Address"
+          onChange={(e) => setAddress(e.target.value)}
         ></Input>
         <SubmitButton title="Update info" goBack={goBack} />
       </RegisterForm>

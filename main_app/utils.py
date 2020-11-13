@@ -7,7 +7,6 @@ import jwt
 
 from django_react_store import settings
 from main_app.models import Customer
-from rest_framework import exceptions
 from rest_framework.authentication import get_authorization_header
 from rest_framework_jwt.settings import api_settings
 

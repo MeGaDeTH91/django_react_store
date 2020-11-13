@@ -18,7 +18,7 @@ const ProfilePage = () => {
 
   const getUserInfo = async () => {
     await executeAuthGetRequest(
-      `http://127.0.0.1:8000/api/users/user?id=${userContext.user.id}`,
+      `http://127.0.0.1:8000/api/profile-details/${userContext.user.id}/`,
       (usersResponse) => {
         setUser(usersResponse);
 
@@ -57,7 +57,7 @@ const ProfilePage = () => {
   return (
     <PageLayout>
       <div className="container">
-        <h1 className="my-4">{user.fullName}</h1>
+        <h1 className="my-4">{`${user.first_name} ${user.last_name}`}</h1>
 
         <div className="row">
           <div className="col-md-8">
@@ -65,9 +65,10 @@ const ProfilePage = () => {
           </div>
 
           <div className="col-md-4 text-center">
+            <h3 className="my-3">Username: {user.username}</h3>
             <h3 className="my-3">Email: {user.email}</h3>
             <h3 className="my-3">
-              Phone: {user.phone ? user.phone : "Not provided"}
+              Address: {user.address ? user.address : "Not provided"}
             </h3>
             <EditButton title="Update info" onClick={editUser}></EditButton>
             <EditButton title="My orders" onClick={myOrders}></EditButton>
