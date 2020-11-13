@@ -6,7 +6,7 @@ const executeAuthGetRequest = async (url, onSuccess, onFailure) => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization: getCookie("token"),
+        Authorization: `JWT ${getCookie("x-auth-token")}`,
       },
     });
 

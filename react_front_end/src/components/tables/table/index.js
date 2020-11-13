@@ -9,9 +9,10 @@ const Table = ({ users }) => {
       <thead className={styles.head}>
         <tr className={styles.row}>
           <TH>#</TH>
+          <TH>Username</TH>
           <TH>Email</TH>
           <TH>Full Name</TH>
-          <TH>Phone</TH>
+          <TH>Address</TH>
           <TH>Active</TH>
           <TH>Administrator</TH>
           <TH>Actions</TH>
@@ -19,7 +20,7 @@ const Table = ({ users }) => {
       </thead>
       <tbody className={styles.body}>
         {users.map((user, index) => {
-          return <TableRow key={user.email} index={index} user={user} />;
+          return <TableRow key={user.username} index={index} user={user} />;
         })}
       </tbody>
     </table>

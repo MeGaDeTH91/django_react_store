@@ -2,15 +2,19 @@ from django.urls import path
 from rest_framework_jwt.views import obtain_jwt_token
 
 from main_app.views.categories import ListCategoriesView
-from main_app.views.customer import authenticate_user, CustomerList, get_all_users
+from main_app.views.customer import authenticate_user, CustomerList, users_all, user_details, user_edit
 from main_app.views.products import ListProductsView
 
 urlpatterns = [
     # User urls
     path('users/login/', obtain_jwt_token),
     path('users/verify/', authenticate_user),
-    path('users/all/', get_all_users),
+    path('users/all/', users_all),
     path('users/register/', CustomerList.as_view()),
+
+    # Profile urls
+    path('profile-details/<int:pk>/', user_details),
+    path('profile-edit/<int:pk>/', user_edit),
 
     # Product urls
     path('products/all/', ListProductsView.as_view(), name='products-all'),

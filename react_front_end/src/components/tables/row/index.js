@@ -12,7 +12,7 @@ const TableRow = ({ user, index }) => {
   const history = useHistory();
 
   const userIsAdmin = () => {
-    return user.isAdministrator ? (
+    return user.is_superuser ? (
       <Checkbox disabled checked type="checkbox" />
     ) : (
       <Checkbox disabled type="checkbox" />
@@ -20,7 +20,7 @@ const TableRow = ({ user, index }) => {
   };
 
   const userIsActive = () => {
-    return user.isActive ? (
+    return user.is_active ? (
       <Checkbox disabled checked type="checkbox" />
     ) : (
       <Checkbox disabled type="checkbox" />
@@ -80,9 +80,10 @@ const TableRow = ({ user, index }) => {
   return (
     <tr className={styles.row}>
       <TD>{`${index + 1}.`}</TD>
+      <TD>{user.username}</TD>
       <TD>{user.email}</TD>
-      <TD>{user.fullName}</TD>
-      {user.phone ? <TD>{user.phone}</TD> : <TD>Not provided</TD>}
+      <TD>{`${user.first_name} ${user.last_name}`}</TD>
+      {user.address ? <TD>{user.address}</TD> : <TD>Not provided</TD>}
       <TD>{userIsActive()}</TD>
       <TD>{userIsAdmin()}</TD>
       <TD>
