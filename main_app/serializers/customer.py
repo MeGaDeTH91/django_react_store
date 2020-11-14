@@ -26,9 +26,9 @@ class CustomerSerializerWithToken(serializers.ModelSerializer):
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
+        email = validated_data.pop('email', None)
         first_name = validated_data.pop('first_name', None)
         last_name = validated_data.pop('last_name', None)
-        email = validated_data.pop('email', None)
         address = validated_data.pop('address', None)
         instance = self.Meta.model(**validated_data)
 
