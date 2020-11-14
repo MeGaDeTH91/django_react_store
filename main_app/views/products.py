@@ -7,9 +7,6 @@ from ..serializers.product import ProductSerializer
 
 class ListProductsView(APIView):
     def get(self, req):
-        products = Product.objects.all()
+        products = Product.objects.order_by('created_at').all()
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data)
-
-    def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)

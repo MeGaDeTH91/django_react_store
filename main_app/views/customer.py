@@ -20,6 +20,38 @@ def authenticate_user(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@api_view(['PUT'])
+@authenticate_admin_middleware
+def user_change_role(request, pk):
+    """
+    Change user role, performed only by administrators.
+    """
+    user = Customer.objects.get(pk=pk)
+    if not user:
+        return Response('No such user!', status=status.HTTP_404_NOT_FOUND)
+
+    user.is_superuser = not user.is_superuser
+
+    user.save()
+    return Response('User role changed successfully!', status=status.HTTP_200_OK)
+
+
+@api_view(['PUT'])
+@authenticate_admin_middleware
+def user_change_status(request, pk):
+    """
+    Change user status, performed only by administrators.
+    """
+    user = Customer.objects.get(pk=pk)
+
+    if not user:
+        return Response('No such user!', status=status.HTTP_404_NOT_FOUND)
+    user.is_active = not user.is_active
+
+    user.save()
+    return Response('User status changed successfully!', status=status.HTTP_200_OK)
+
+
 class CustomerRegister(APIView):
     """
     Create a new user. It's called 'UserList' because normally we'd have a get
@@ -28,7 +60,7 @@ class CustomerRegister(APIView):
 
     @method_decorator(authenticate_admin_middleware)
     def get(self, request):
-        users = Customer.objects.all()
+        users = Customer.objects.order_by('id').all()
         serializer = CustomerSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

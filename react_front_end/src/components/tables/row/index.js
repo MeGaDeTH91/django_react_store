@@ -28,16 +28,16 @@ const TableRow = ({ user, index }) => {
   };
 
   const roleButton = () => {
-    return user.isAdministrator ? "Revoke" : "Make admin";
+    return user.is_superuser ? "Revoke" : "Make admin";
   };
 
   const statusButton = () => {
-    return user.isActive ? "Ban" : "Unban";
+    return user.is_active ? "Ban" : "Unban";
   };
 
   const toggleRole = async () => {
     await executeAuthRequest(
-      `http://127.0.0.1:8000/api/users/changeRole?id=${user._id}`,
+      `http://127.0.0.1:8000/api/users/change-role/${user.id}/`,
       "PUT",
       {},
       (usersResponse) => {
@@ -56,7 +56,7 @@ const TableRow = ({ user, index }) => {
 
   const toggleStatus = async () => {
     await executeAuthRequest(
-      `http://127.0.0.1:8000/api/users/changeStatus?id=${user._id}`,
+      `http://127.0.0.1:8000/api/users/change-status/${user.id}/`,
       "PUT",
       {},
       (usersResponse) => {
