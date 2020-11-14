@@ -10,6 +10,7 @@ import SubmitButton from "../../../components/buttons/submit";
 import executeAuthGetRequest from "../../../utils/executeAuthGETRequest";
 import executeAuthRequest from "../../../utils/executeAuthRequest";
 import UserContext from "../../../UserContext";
+import validateTextField from "../../../utils/validateField";
 
 const EditUserPage = () => {
   const [username, setUsername] = useState("");
@@ -25,11 +26,10 @@ const EditUserPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!first_name || !last_name) {
-      notifications.showMessage(
-        "Please provide full name.",
-        "danger"
-      );
+    if (!validateTextField(first_name, "Please provide first name.", notifications) || 
+    !validateTextField(last_name, "Please provide last name.", notifications) ||
+    !validateTextField(email, "Please provide valid email address.", notifications) ||
+    !validateTextField(address, "Please provide valid delivery address.", notifications)) {
       return;
     }
 
