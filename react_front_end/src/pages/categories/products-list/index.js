@@ -16,7 +16,7 @@ class CategoryProductsPage extends Component {
   }
 
   getProducts = async (id) => {
-    const promise = await fetch(`http://127.0.0.1:8000/api/categories/category?id=${id}`);
+    const promise = await fetch(`http://127.0.0.1:8000/api/categories/${id}/`);
 
     const category = await promise.json();
 
@@ -41,8 +41,8 @@ class CategoryProductsPage extends Component {
               {this.state.products.map((x) => {
                 return (
                   <CardProduct
-                    key={x._id}
-                    productId={x._id}
+                    key={x.id}
+                    productId={x.id}
                     imageURL={x.imageURL}
                     title={x.title}
                     price={formatPrice(x.price)}

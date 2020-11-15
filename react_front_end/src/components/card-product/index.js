@@ -8,7 +8,7 @@ import CardFooter from "../card-basics/footer";
 import CardParagraph from "../card-basics/paragraph";
 
 const CardProduct = (props) => {
-  const { productId, imageURL, title, price, category_title, category_id, quantity } = props;
+  const { productId, imageURL, title, price, category, quantity } = props;
   const history = useHistory();
   const context = useContext(UserContext);
 
@@ -17,7 +17,7 @@ const CardProduct = (props) => {
   };
 
   const { user } = context;
-  const userIsAdministrator = user && user.isAdministrator;
+  const userIsAdministrator = user && user.is_superuser;
 
   const editProduct = () => {
     history.push(`/products/product-edit/${productId}`);
@@ -34,7 +34,7 @@ const CardProduct = (props) => {
         <CardBody title={title} price={price} quantity={quantity} />
       </div>
       <br />
-      <CardParagraph title={category_title} id={category_id} />
+      <CardParagraph title={category.title} id={category.id} />
       <hr />
       {userIsAdministrator ? (
         <CardFooter

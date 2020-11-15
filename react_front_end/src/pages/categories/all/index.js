@@ -37,8 +37,8 @@ class CategoriesPage extends Component {
             {this.state.categories.map((x) => {
               return (
                 <CardCategory
-                  key={x._id}
-                  categoryId={x._id}
+                  key={x.id}
+                  categoryId={x.id}
                   imageURL={x.imageURL}
                   title={x.title}
                 ></CardCategory>

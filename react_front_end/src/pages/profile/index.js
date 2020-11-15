@@ -22,9 +22,10 @@ const ProfilePage = () => {
       (usersResponse) => {
         setUser(usersResponse);
 
-        if (usersResponse.reviews && usersResponse.reviews.length) {
+        console.log(usersResponse)
+        if (usersResponse.review_set && usersResponse.review_set.length) {
           setReviews(
-            usersResponse.reviews.sort((a, b) =>
+            usersResponse.review_set.sort((a, b) =>
               ("" + b.created_at).localeCompare("" + a.created_at)
             )
           );

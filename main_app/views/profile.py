@@ -10,17 +10,7 @@ from main_app.serializers.customer import CustomerSerializer
 from main_app.serializers.profile import ProfileSerializer
 
 
-@api_view(['GET'])
-@authenticate_user_middleware
-def profile_details(request, pk):
-    if request.user.id != pk:
-        return Response('You are not allowed to perform this action.', status=status.HTTP_401_UNAUTHORIZED)
-    user = Customer.objects.get(pk=pk)
-    serializer = CustomerSerializer(user)
-    return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-class ProfileEdit(APIView):
+class ProfileDetails(APIView):
     """
     Profile edit view.
     """
@@ -38,6 +28,10 @@ class ProfileEdit(APIView):
         if request.user.id != pk:
             return Response('You are not allowed to perform this action.', status=status.HTTP_401_UNAUTHORIZED)
         user = Customer.objects.get(pk=pk)
+
+        if not user:
+            return Response('No such user!', status=status.HTTP_404_NOT_FOUND)
+
         serializer = ProfileSerializer(instance=user, data=request.data)
         if serializer.is_valid():
             serializer.save()

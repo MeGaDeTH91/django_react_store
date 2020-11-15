@@ -3,7 +3,7 @@ import { Dropdown } from "react-bootstrap";
 
 const CategoryDropdownItem = ({ category }) => {
   return (
-      <Dropdown.Item eventKey={category._id}>{category.title}</Dropdown.Item>
+      <Dropdown.Item eventKey={category.id}>{category.title}</Dropdown.Item>
   );
 };
 

@@ -76,7 +76,7 @@ const CreateProductPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     if (!title || !description || !imageURL || !category) {
       notifications.showMessage(
         "Please provide product title, description, upload Image and choose category.",
@@ -86,7 +86,7 @@ const CreateProductPage = () => {
     }
 
     await executeAuthRequest(
-      "http://127.0.0.1:8000/api/products/create",
+      "http://127.0.0.1:8000/api/products/create/",
       "POST",
       {
         title,

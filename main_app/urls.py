@@ -1,10 +1,10 @@
 from django.urls import path
 from rest_framework_jwt.views import obtain_jwt_token
 
-from main_app.views.categories import ListCategoriesView
+from main_app.views.categories import ListCategoriesView, DetailsCategoryView
 from main_app.views.customer import authenticate_user, CustomerRegister, user_change_role, user_change_status
-from main_app.views.products import ListProductsView
-from main_app.views.profile import profile_details, ProfileEdit
+from main_app.views.products import ListProductsView, DetailsProductView
+from main_app.views.profile import ProfileDetails
 
 urlpatterns = [
     # User urls
@@ -16,14 +16,21 @@ urlpatterns = [
     path('users/change-status/<int:pk>/', user_change_status, name='users-change-status'),
 
     # Profile urls
-    path('profile-details/<int:pk>/', profile_details, name='profile-details'),
-    path('profile-edit/<int:pk>/', ProfileEdit.as_view(), name='profile-edit'),
+    path('profile-details/<int:pk>/', ProfileDetails.as_view(), name='profile-details'),
+    path('profile-edit/<int:pk>/', ProfileDetails.as_view(), name='profile-edit'),
 
     # Product urls
     path('products/all/', ListProductsView.as_view(), name='products-all'),
+    path('products/create/', DetailsProductView.as_view(), name='product-create'),
+    path('products/<int:pk>/', DetailsProductView.as_view(), name='product-details'),
+    path('products/edit/<int:pk>/', DetailsProductView.as_view(), name='product-edit'),
+    path('products/delete/<int:pk>/', DetailsProductView.as_view(), name='product-delete'),
 
     # Category urls
     path('categories/all/', ListCategoriesView.as_view(), name='categories-all'),
+    path('categories/<int:pk>/', DetailsCategoryView.as_view(), name='category-details'),
+    path('categories/create/', DetailsCategoryView.as_view(), name='category-create'),
+    path('categories/edit/<int:pk>/', DetailsCategoryView.as_view(), name='category-edit'),
 
 
     # # Expense pages

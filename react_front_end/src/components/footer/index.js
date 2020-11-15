@@ -4,7 +4,7 @@ import styles from "./index.module.css";
 const Footer = () => {
   return (
     <footer id="copyright" className={styles.container}>
-      <p className={styles.copyright}>React-Store © 2020</p>
+      <p className={styles.copyright}>Django-React-Store © 2020</p>
     </footer>
   );
 }

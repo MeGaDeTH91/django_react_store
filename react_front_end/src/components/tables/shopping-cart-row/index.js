@@ -15,7 +15,7 @@ const ShoppingCartTableRow = ({ product, index }) => {
 
   const removeProduct = async () => {
     await executeAuthRequest(
-      `http://127.0.0.1:8000/api/orders/remove-from-cart?productId=${product._id}`,
+      `http://127.0.0.1:8000/api/orders/remove-from-cart/${product.id}/`,
       "POST",
       {
         userId: userContext.user.id

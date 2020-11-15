@@ -26,7 +26,7 @@ class ProductDetailsPage extends Component {
 
   getProduct = async (productId) => {
     const response = await fetch(
-      `http://127.0.0.1:8000/api/products/product?id=${productId}`
+      `http://127.0.0.1:8000/api/products/${productId}/`
     );
 
     if (!response.ok) {
@@ -37,19 +37,19 @@ class ProductDetailsPage extends Component {
 
     this.setState({
       product: result,
-      reviews: result.productReviews.sort((a, b) =>
+      reviews: result.review_set.sort((a, b) =>
         ("" + b.created_at).localeCompare("" + a.created_at)
       ),
     });
   };
 
   editProduct = () => {
-    this.props.history.push(`/products/product-edit/${this.state.product._id}`);
+    this.props.history.push(`/products/product-edit/${this.state.product.id}`);
   };
 
   deleteProduct = () => {
     this.props.history.push(
-      `/products/product-delete/${this.state.product._id}`
+      `/products/product-delete/${this.state.product.id}`
     );
   };
 
@@ -57,7 +57,7 @@ class ProductDetailsPage extends Component {
     const userId = this.context.user.id;
 
     await executeAuthRequest(
-      `http://127.0.0.1:8000/api/orders/add-to-cart?productId=${productId}`,
+      `http://127.0.0.1:8000/api/orders/add-to-cart/${productId}/`,
       "POST",
       {
         productId,
@@ -120,7 +120,7 @@ class ProductDetailsPage extends Component {
     e.preventDefault();
 
     await executeAuthRequest(
-      `http://127.0.0.1:8000/api/reviews/create?id=${this.state.product._id}`,
+      `http://127.0.0.1:8000/api/reviews/create/${this.state.product.id}/`,
       "POST",
       {
         content: this.state.review,
@@ -159,7 +159,7 @@ class ProductDetailsPage extends Component {
     }
 
     const { user } = this.context;
-    const userIsAdministrator = user && user.isAdministrator;
+    const userIsAdministrator = user && user.is_superuser;
     const userIsLogged = user && user.loggedIn;
 
     return (
@@ -181,7 +181,7 @@ class ProductDetailsPage extends Component {
               {userIsLogged && (product && product.quantity > 0 ) ? (
                 <AddButton
                   title="Add to cart"
-                  onClick={(e) => this.addProductToCart(product._id)}
+                  onClick={(e) => this.addProductToCart(product.id)}
                 />
               ) : null}
               {userIsAdministrator ? (

@@ -8,7 +8,8 @@ class CustomerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Customer
-        fields = ('id', 'username', 'email', 'first_name', 'last_name', 'is_active', 'is_superuser', 'address')
+        fields = ('id', 'username', 'review_set', 'email', 
+                  'first_name', 'last_name', 'is_active', 'is_superuser', 'address')
 
 
 class CustomerSerializerWithToken(serializers.ModelSerializer):

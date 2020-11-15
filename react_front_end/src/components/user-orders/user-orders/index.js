@@ -13,14 +13,14 @@ const UserOrder = ( { order, index } ) => {
         className={styles["order-image"]}
         alt="order"
       ></img>
-      <p className={styles.description}>{`${index + 1} - #Order: ${order._id}`}</p>
+      <p className={styles.description}>{`${index + 1} - #Order: ${order.id}`}</p>
       <div>
         <span className={styles.user}>
           <small>Products: </small>
           
         </span>
         {order.products ? (order.products.map((product, index) => {
-            return (<span><TextLink key={product._id} title={product.title} href={`products/product-details/${product._id}`} />, </span>)
+            return (<span><TextLink key={product.id} title={product.title} href={`products/product-details/${product.id}`} />, </span>)
           })) : (<p>Database error.</p>)}
       </div>
       <div>

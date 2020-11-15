@@ -6,7 +6,7 @@ const ListUserOrders = ( { orders } ) => {
 
   const renderOrders = () => {
     return orders.map((order, index) => {
-      return <UserOrder key={order._id} index={index} order={order} />;
+      return <UserOrder key={order.id} index={index} order={order} />;
     });
   };
 

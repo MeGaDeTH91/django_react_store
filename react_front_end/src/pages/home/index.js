@@ -45,8 +45,7 @@ class HomePage extends Component {
                     title={x.title}
                     price={formatPrice(x.price)}
                     quantity={x.quantity}
-                    category_title={x.category_title}
-                    category_id={x.category}
+                    category={x.category}
                   ></CardProduct>
                 );
               })}

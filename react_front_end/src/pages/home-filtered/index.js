@@ -45,8 +45,8 @@ class HomeFilteredPage extends Component {
               {this.state.products.map((x) => {
                 return (
                   <CardProduct
-                    key={x._id}
-                    productId={x._id}
+                    key={x.id}
+                    productId={x.id}
                     imageURL={x.imageURL}
                     title={x.title}
                     price={formatPrice(x.price)}

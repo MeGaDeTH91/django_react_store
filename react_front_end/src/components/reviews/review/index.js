@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./index.module.css";
 import reviewLogo from "../../../images/review.png";
 
-const Review = ({ content, author, index, date }) => {
+const Review = ({ content, first_name, last_name, index, date }) => {
 
   const formattedDate = date.slice(0, 10); 
   return (
@@ -16,7 +16,7 @@ const Review = ({ content, author, index, date }) => {
       <div>
         <span className={styles.user}>
           <small>Author: </small>
-          {author}
+          {first_name} {last_name}
         </span>
       </div>
       <div>

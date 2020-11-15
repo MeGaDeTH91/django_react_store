@@ -42,7 +42,7 @@ const EditProductPage = () => {
 
   const getProduct = useCallback(async () => {
     const response = await fetch(
-      `http://127.0.0.1:8000/api/products/product?id=${params.id}`
+      `http://127.0.0.1:8000/api/products/${params.id}/`
     );
 
     if (!response.ok) {
@@ -62,7 +62,7 @@ const EditProductPage = () => {
       setPrice(product.price);
       setQuantity(product.quantity);
       setTitle(product.title);
-      setCategory(product.category._id);
+      setCategory(product.category.id);
       setCategoryTitle(product.category.title);
     }
   }, [history, notifications, params]);
@@ -90,7 +90,7 @@ const EditProductPage = () => {
     }
 
     await executeAuthRequest(
-      `http://127.0.0.1:8000/api/products/product?id=${params.id}`,
+      `http://127.0.0.1:8000/api/products/edit/${params.id}/`,
       "PUT",
       {
         title,

@@ -42,26 +42,24 @@ const CreateCategoryPage = () => {
     e.preventDefault();
 
     if (!title || !imageURL) {
-      notifications.showMessage('Please provide category title and upload Image.', 'danger');
+      notifications.showMessage('Please provide unique category title and upload Image.', 'danger');
       return;
     }
 
-    await executeAuthRequest("http://127.0.0.1:8000/api/categories/create", 
+    await executeAuthRequest("http://127.0.0.1:8000/api/categories/create/", 
       "POST",
       {
         title,
         imageURL,
       },(product) => {
-        notifications.showMessage("Product created successfully!", 'success');
-        history.push("/");
+        notifications.showMessage("Category created successfully!", 'success');
+        history.push("/categories/all");
       },
       (error) => {
-        notifications.showMessage("Please provide different product title.", 'danger');
-        history.push("/products/create");
+        notifications.showMessage("Please provide different category title.", 'danger');
+        history.push("/categories/create");
       }
     );
-
-    history.push("/categories/all");
   };
 
   return (
