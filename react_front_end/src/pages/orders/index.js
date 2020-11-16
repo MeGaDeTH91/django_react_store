@@ -3,23 +3,21 @@ import PageLayout from "../../components/page-layout";
 import { useHistory } from "react-router-dom";
 import executeAuthGetRequest from "../../utils/executeAuthGETRequest";
 import NotificationContext from "../../NotificationContext";
-import UserContext from "../../UserContext";
 import ListUserOrders from "../../components/user-orders/user-list";
 
 const OrdersPage = () => {
   const notifications = useContext(NotificationContext);
-  const userContext = useContext(UserContext);
   const history = useHistory();
 
   const [orders, setOrders] = useState([]);
 
   const getUserInfo = async () => {
     await executeAuthGetRequest(
-      `http://127.0.0.1:8000/api/orders/user-orders?userId=${userContext.user.id}`,
-      (ordersResponse) => {
-        if (ordersResponse && ordersResponse.length) {
+      `http://127.0.0.1:8000/api/orders/all/`,
+      (response) => {
+        if (response.order_set && response.order_set.length) {
           setOrders(
-            ordersResponse.sort((a, b) =>
+            response.order_set.sort((a, b) =>
               ("" + b.created_at).localeCompare("" + a.created_at)
             )
           );

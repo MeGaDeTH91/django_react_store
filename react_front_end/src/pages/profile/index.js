@@ -22,7 +22,6 @@ const ProfilePage = () => {
       (usersResponse) => {
         setUser(usersResponse);
 
-        console.log(usersResponse)
         if (usersResponse.review_set && usersResponse.review_set.length) {
           setReviews(
             usersResponse.review_set.sort((a, b) =>

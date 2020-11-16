@@ -6,7 +6,7 @@ const ListUserReviews = ( { reviews } ) => {
 
   const renderReviews = () => {
     return reviews.map((review, index) => {
-      return <Review key={review.id} index={index} content={review.content} product={review.product.title} date={review.created_at} />;
+      return <Review key={review.id} index={index} content={review.content} product={review.product_title} date={review.created_at} />;
     });
   };
 

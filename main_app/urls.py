@@ -4,7 +4,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 from main_app.views.categories import ListCategoriesView, DetailsCategoryView
 from main_app.views.customer import authenticate_user, CustomerRegister, user_change_role, user_change_status
 from main_app.views.products import ListProductsView, DetailsProductView
-from main_app.views.profile import ProfileDetails
+from main_app.views.profile import ProfileDetails, ProfileShoppingCart, ProfileOrders
 
 urlpatterns = [
     # User urls
@@ -18,6 +18,7 @@ urlpatterns = [
     # Profile urls
     path('profile-details/<int:pk>/', ProfileDetails.as_view(), name='profile-details'),
     path('profile-edit/<int:pk>/', ProfileDetails.as_view(), name='profile-edit'),
+    path('profile-cart/<int:pk>/', ProfileShoppingCart.as_view(), name='profile-cart'),
 
     # Product urls
     path('products/all/', ListProductsView.as_view(), name='products-all'),
@@ -32,6 +33,11 @@ urlpatterns = [
     path('categories/create/', DetailsCategoryView.as_view(), name='category-create'),
     path('categories/edit/<int:pk>/', DetailsCategoryView.as_view(), name='category-edit'),
 
+    # Order urls
+    path('orders/all/', ProfileOrders.as_view(), name='orders-all'),
+    path('orders/create/', ProfileOrders.as_view(), name='orders-create'),
+    path('orders/add-to-cart/<int:pk>/', ProfileShoppingCart.as_view(), name='add-product-to-cart'),
+    path('orders/remove-from-cart/<int:pk>/', ProfileShoppingCart.as_view(), name='remove-product-from-cart'),
 
     # # Expense pages
     # path('create/', expenses.expense_create, name='create expense'),

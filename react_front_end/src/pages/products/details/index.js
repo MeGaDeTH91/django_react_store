@@ -60,8 +60,7 @@ class ProductDetailsPage extends Component {
       `http://127.0.0.1:8000/api/orders/add-to-cart/${productId}/`,
       "POST",
       {
-        productId,
-        userId,
+        userId
       },
       (product) => {
         console.log("Product added successfully in shopping cart.");

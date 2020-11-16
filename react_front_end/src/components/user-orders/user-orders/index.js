@@ -5,7 +5,8 @@ import TextLink from "../../text-link";
 
 const UserOrder = ( { order, index } ) => {
 
-  const formattedDate = order.created_at.slice(0, 10); 
+  const formattedDate = order.created_at.slice(0, 10);
+
   return (
     <div className={styles.container}>
       <img
@@ -19,7 +20,7 @@ const UserOrder = ( { order, index } ) => {
           <small>Products: </small>
           
         </span>
-        {order.products ? (order.products.map((product, index) => {
+        {order.products ? (order.products.map((product, currentIndex) => {
             return (<span><TextLink key={product.id} title={product.title} href={`products/product-details/${product.id}`} />, </span>)
           })) : (<p>Database error.</p>)}
       </div>

@@ -17,9 +17,9 @@ const ShoppingCartPage = () => {
 
   const getUserCart = async () => {
     await executeAuthGetRequest(
-      `http://127.0.0.1:8000/api/orders/user-cart?userId=${userContext.user.id}`,
-      (userCart) => {
-        setCart(userCart);
+      `http://127.0.0.1:8000/api/profile-cart/${userContext.user.id}/`,
+      (response) => {
+        setCart(response.cart);
       },
       (error) => {
         notifications.showMessage(error, "danger");
@@ -30,10 +30,9 @@ const ShoppingCartPage = () => {
 
   const submitOrder = async () => {
     await executeAuthRequest(
-      `http://127.0.0.1:8000/api/orders/create-order?userId=${userContext.user.id}`,
+      `http://127.0.0.1:8000/api/orders/create/`,
       "POST",
       {
-        userId: userContext.user.id
       },
       (usersResponse) => {
         notifications.showMessage("Order placed successfully!", "success");
