@@ -6,7 +6,7 @@ from rest_framework.response import Response
 
 from ..middleware.authenticate_admin_middleware import authenticate_admin_middleware
 from ..models import Category
-from ..serializers.category import ListCategorySerializer
+from ..serializers.category_concise import ListCategorySerializer
 from ..serializers.category_details import DetailsCategorySerializer
 
 

@@ -6,19 +6,17 @@ import executeAuthRequest from "../../../utils/executeAuthRequest";
 import NotificationContext from "../../../NotificationContext";
 import { useHistory } from "react-router-dom";
 import formatPrice from "../../../utils/priceFormatter";
-import UserContext from "../../../UserContext";
 
 const ShoppingCartTableRow = ({ product, index }) => {
-  const userContext = useContext(UserContext);
   const notifications = useContext(NotificationContext);
   const history = useHistory();
 
   const removeProduct = async () => {
     await executeAuthRequest(
       `http://127.0.0.1:8000/api/orders/remove-from-cart/${product.id}/`,
-      "POST",
+      "DELETE",
       {
-        userId: userContext.user.id
+        
       },
       (usersResponse) => {
         notifications.showMessage("Product removed from cart successfully!", "success");

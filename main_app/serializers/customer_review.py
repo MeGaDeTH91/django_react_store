@@ -10,7 +10,7 @@ class ProductReviewSerializer(serializers.ModelSerializer):
 
 
 class CustomerReviewSerializer(serializers.ModelSerializer):
-    product = ProductReviewSerializer()
+    product_title = serializers.ReadOnlyField(source='product.title')
 
     class Meta:
         model = Review

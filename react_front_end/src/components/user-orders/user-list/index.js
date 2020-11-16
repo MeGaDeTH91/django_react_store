@@ -5,6 +5,7 @@ import UserOrder from "../user-orders";
 const ListUserOrders = ( { orders } ) => {
 
   const renderOrders = () => {
+
     return orders.map((order, index) => {
       return <UserOrder key={order.id} index={index} order={order} />;
     });
