@@ -4,7 +4,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from ..middleware.authenticate_admin_middleware import authenticate_admin_middleware
-from ..models import Product
+from ..middleware.authenticate_user_middleware import authenticate_user_middleware
+from ..models import Product, Customer, Review
 from ..serializers.product import ProductSerializer, ProductCreateSerializer
 
 
@@ -55,3 +56,28 @@ class DetailsProductView(APIView):
 
         product.delete()
         return Response('Product deleted successfully!', status=status.HTTP_200_OK)
+
+
+class ReviewCreateView(APIView):
+    @method_decorator(authenticate_user_middleware)
+    def post(self, request, pk, format=None):
+        user = Customer.objects.get(pk=request.user.id)
+        product = Product.objects.get(pk=pk)
+        content = request.data.get('content')
+
+        if not user:
+            return Response('No such user!', status=status.HTTP_404_NOT_FOUND)
+        if not product:
+            return Response('No such product!', status=status.HTTP_404_NOT_FOUND)
+        if not content or len(content) < 3:
+            return Response('Reviews must have content!', status=status.HTTP_400_BAD_REQUEST)
+
+        review = Review()
+        review.product = product
+        review.reviewer = user
+        review.content = content
+
+        review.save()
+
+        return Response('Review created successfully!', status=status.HTTP_200_OK)
+

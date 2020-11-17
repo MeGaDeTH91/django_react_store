@@ -20,9 +20,11 @@ const UserOrder = ( { order, index } ) => {
           <small>Products: </small>
           
         </span>
-        {order.products ? (order.products.map((product, currentIndex) => {
-            return (<span><TextLink key={product.id} title={product.title} href={`products/product-details/${product.id}`} />, </span>)
-          })) : (<p>Database error.</p>)}
+        {order.products ? 
+        (order.products
+          .map((product, currentIndex) => <TextLink key={product.id} title={product.title} href={`products/product-details/${product.id}`} />)
+          .reduce((prev, curr) => [prev, ', ', curr]))
+        : (<p>Database error.</p>)}
       </div>
       <div>
         <span className={styles.user}>

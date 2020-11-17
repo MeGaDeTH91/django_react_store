@@ -2,8 +2,7 @@ describe("Admin Category pages", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000/login");
 
-    cy.get("input[name=email]").type("marto@abv.bg");
-
+    cy.get("input[name=username]").type("marto");
     cy.get("input[name=password]").type(`123{enter}`);
 
     cy.wait(5500);
@@ -25,9 +24,9 @@ describe("Admin Category pages", () => {
   it("Should list all categories successfully!", () => {
     cy.get("div").contains("Musical instruments");
     cy.get("div").contains("Electronics");
-    cy.get("div").contains("Home Accessories");
+    cy.get("div").contains("Accessories");
     cy.get("div").contains("Sports equipment");
-    cy.get("div").contains("Vehicles");
+    cy.get("div").contains("Machines");
   });
 
   it("Should list all category products successfully!", () => {
@@ -84,16 +83,16 @@ describe("Admin Category pages", () => {
 
     cy.get("input[name=title]").should("have.value", categoryName);
 
-    cy.get("input[name=title]").clear().type("T");
+    cy.get("input[name=title]").clear().type(" ");
     cy.get("button").contains("Change category").click();
 
     cy.get("div").contains(
-      "Error occured: Title should be between 6 and 35 characters long."
+      "Error occured: Please provide valid data."
     );
   });
 
   it("Should show footer correctly!", () => {
     cy.get("footer").should("be.visible");
-    cy.get("p").contains("React-Store © 2020");
+    cy.get("p").contains("Django-React-Store © 2020");
   });
 });

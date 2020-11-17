@@ -3,7 +3,7 @@ from rest_framework_jwt.views import obtain_jwt_token
 
 from main_app.views.categories import ListCategoriesView, DetailsCategoryView
 from main_app.views.customer import authenticate_user, CustomerRegister, user_change_role, user_change_status
-from main_app.views.products import ListProductsView, DetailsProductView
+from main_app.views.products import ListProductsView, DetailsProductView, ReviewCreateView
 from main_app.views.profile import ProfileDetails, ProfileShoppingCart, ProfileOrders
 
 urlpatterns = [
@@ -26,6 +26,7 @@ urlpatterns = [
     path('products/<int:pk>/', DetailsProductView.as_view(), name='product-details'),
     path('products/edit/<int:pk>/', DetailsProductView.as_view(), name='product-edit'),
     path('products/delete/<int:pk>/', DetailsProductView.as_view(), name='product-delete'),
+    path('products/create-review/<int:pk>/', ReviewCreateView.as_view(), name='product-create-review'),
 
     # Category urls
     path('categories/all/', ListCategoriesView.as_view(), name='categories-all'),

@@ -119,6 +119,11 @@ class ProfileOrders(APIView):
             order.products.add(*order_products)
             order.save()
 
+            for prod in order_products:
+                db_product = Product.objects.get(pk=prod.id)
+                db_product.quantity -= 1
+                db_product.save()
+
             user.cart.clear()
             user.save()
         except Exception as ex:

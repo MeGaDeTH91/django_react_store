@@ -18,11 +18,10 @@ describe("Home page", () => {
     cy.get("div").contains("Jackson SL2");
   });
 
-  it("sets auth cookie when logging in via form submission", function () {
+  it("Should set Auth Cookie when logging in via form submission", function () {
     cy.visit("http://localhost:3000/login");
 
-    cy.get("input[name=email]").type("marto@abv.bg");
-
+    cy.get("input[name=username]").type("marto");
     cy.get("input[name=password]").type(`123{enter}`);
 
     cy.wait(2500);
@@ -36,6 +35,6 @@ describe("Home page", () => {
 
   it("Should show footer correctly!", () => {
     cy.get("footer").should("be.visible");
-    cy.get('p').contains('React-Store © 2020');
+    cy.get('p').contains('Django-React-Store © 2020');
   });
 });

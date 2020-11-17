@@ -13,9 +13,11 @@ describe("Register page", () => {
 
   it("Should register user and set auth cookie when logging in!", function () {
     const currentName = userID_generate();
-    cy.get("input[name=email]").type(currentName);
-    cy.get("input[name=fullName]").type("Test User");
-    cy.get("input[name=phone]").type("0889");
+    cy.get("input[name=username]").type(currentName);
+    cy.get("input[name=email]").type("dummy@mail.bg");
+    cy.get("input[name=first_name]").type("Test");
+    cy.get("input[name=last_name]").type("User");
+    cy.get("input[name=address]").type("dummy address");
 
     cy.get("input[name=password]").type(`123`);
     cy.get("input[name=re-password]").type(`123{enter}`);
@@ -34,10 +36,12 @@ describe("Register page", () => {
     cy.get("h3").contains(currentName);
   });
 
-  it("Should throw error on attempt with invalid email!", function () {
-    cy.get("input[name=email]").type("invalid email");
-    cy.get("input[name=fullName]").type("Test User");
-    cy.get("input[name=phone]").type("0889");
+  it("Should throw error on attempt with invalid username!", function () {
+    cy.get("input[name=username]").type(" ");
+    cy.get("input[name=email]").type("dummy@mail.bg");
+    cy.get("input[name=first_name]").type("Test");
+    cy.get("input[name=last_name]").type("User");
+    cy.get("input[name=address]").type("dummy address");
 
     cy.get("input[name=password]").type(`123`);
     cy.get("input[name=re-password]").type(`123{enter}`);
@@ -46,14 +50,16 @@ describe("Register page", () => {
 
     cy.getCookies().should("have.length", 0);
 
-    cy.get("div").contains("Email, full name, password and confirmation password should be more than 2 characters.");
+    cy.get("div").contains("Please fill in all fields correctly.");
     cy.url().should("eq", "http://localhost:3000/register");
   });
 
   it("Should throw error on attempt with invalid full name!", function () {
-    cy.get("input[name=email]").type(userID_generate());
-    cy.get("input[name=fullName]").type("Y");
-    cy.get("input[name=phone]").type("0889");
+    cy.get("input[name=username]").type(userID_generate());
+    cy.get("input[name=email]").type("dummy@mail.bg");
+    cy.get("input[name=first_name]").type(" ");
+    cy.get("input[name=last_name]").type(" ");
+    cy.get("input[name=address]").type("dummy address");
 
     cy.get("input[name=password]").type(`123`);
     cy.get("input[name=re-password]").type(`123{enter}`);
@@ -62,14 +68,16 @@ describe("Register page", () => {
 
     cy.getCookies().should("have.length", 0);
 
-    cy.get("div").contains("Email, full name, password and confirmation password should be more than 2 characters.");
+    cy.get("div").contains("Please fill in all fields correctly.");
     cy.url().should("eq", "http://localhost:3000/register");
   });
 
   it("Should throw error on attempt with invalid password!", function () {
-    cy.get("input[name=email]").type(userID_generate());
-    cy.get("input[name=fullName]").type("Test User");
-    cy.get("input[name=phone]").type("0889");
+    cy.get("input[name=username]").type(userID_generate());
+    cy.get("input[name=email]").type("dummy@mail.bg");
+    cy.get("input[name=first_name]").type("Test");
+    cy.get("input[name=last_name]").type("User");
+    cy.get("input[name=address]").type("dummy address");
 
     cy.get("input[name=password]").type(`1`);
     cy.get("input[name=re-password]").type(`1{enter}`);
@@ -77,18 +85,21 @@ describe("Register page", () => {
     cy.wait(1000);
 
     cy.getCookies().should("have.length", 0);
+    console.log(cy.getCookies())
 
-    cy.get("div").contains("Email, full name, password and confirmation password should be more than 2 characters.");
+    cy.get("div").contains("Username, full name, password and confirmation password should be more than 2 characters.");
     cy.url().should("eq", "http://localhost:3000/register");
   });
 
   it("Should throw error on attempt with different re-password!", function () {
-    cy.get("input[name=email]").type(userID_generate());
-    cy.get("input[name=fullName]").type("Test User");
-    cy.get("input[name=phone]").type("0889");
+    cy.get("input[name=username]").type(userID_generate());
+    cy.get("input[name=email]").type("dummy@mail.bg");
+    cy.get("input[name=first_name]").type("Test");
+    cy.get("input[name=last_name]").type("User");
+    cy.get("input[name=address]").type("dummy address");
 
-    cy.get("input[name=password]").type(`123`);
-    cy.get("input[name=re-password]").type(`1{enter}`);
+    cy.get("input[name=password]").type(`12345`);
+    cy.get("input[name=re-password]").type(`123{enter}`);
 
     cy.wait(300);
 
@@ -99,9 +110,11 @@ describe("Register page", () => {
   });
 
   it("Should throw error on attempt with empty re-password!", function () {
-    cy.get("input[name=email]").type(userID_generate());
-    cy.get("input[name=fullName]").type("Test User");
-    cy.get("input[name=phone]").type("0889");
+    cy.get("input[name=username]").type(userID_generate());
+    cy.get("input[name=email]").type("dummy@mail.bg");
+    cy.get("input[name=first_name]").type("Test");
+    cy.get("input[name=last_name]").type("User");
+    cy.get("input[name=address]").type("dummy address");
 
     cy.get("input[name=password]").type(`123`);
     cy.get("input[name=re-password]").type(`{enter}`);
@@ -110,7 +123,7 @@ describe("Register page", () => {
 
     cy.getCookies().should("have.length", 0);
 
-    cy.get("div").contains("Email, full name, password and confirmation password should be more than 2 characters.");
+    cy.get("div").contains("Username, full name, password and confirmation password should be more than 2 characters.");
     cy.url().should("eq", "http://localhost:3000/register");
   });
 

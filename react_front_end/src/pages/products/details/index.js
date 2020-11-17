@@ -119,7 +119,7 @@ class ProductDetailsPage extends Component {
     e.preventDefault();
 
     await executeAuthRequest(
-      `http://127.0.0.1:8000/api/reviews/create/${this.state.product.id}/`,
+      `http://127.0.0.1:8000/api/products/create-review/${this.state.product.id}/`,
       "POST",
       {
         content: this.state.review,

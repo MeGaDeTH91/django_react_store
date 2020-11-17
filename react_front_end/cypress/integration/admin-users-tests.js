@@ -2,8 +2,7 @@ describe("Admin user managemenet pages", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000/login");
 
-    cy.get("input[name=email]").type("marto@abv.bg");
-
+    cy.get("input[name=username]").type("marto");
     cy.get("input[name=password]").type(`123{enter}`);
 
     cy.wait(5500);
@@ -105,6 +104,6 @@ describe("Admin user managemenet pages", () => {
 
   it("Should show footer correctly!", () => {
     cy.get("footer").should("be.visible");
-    cy.get("p").contains("React-Store © 2020");
+    cy.get("p").contains("Django-React-Store © 2020");
   });
 });
