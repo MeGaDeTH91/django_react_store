@@ -46,6 +46,10 @@ Generated\ Files/
 # Visual Studio Code
 .vscode/
 
+# Cypress-coverage
+**/coverage/
+**.nyc*
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*

@@ -41,7 +41,7 @@ describe("Admin Category pages", () => {
   });
 
   it("Should change category from card successfully!", () => {
-    const categoryName = "Some dummy category for testing";
+    const categoryName = "Dummy testing category";
 
     cy.get("div")
       .contains(categoryName)
@@ -71,7 +71,7 @@ describe("Admin Category pages", () => {
   });
 
   it("Should throw error on change category with invalid title!", () => {
-    const categoryName = "Some dummy category for testing";
+    const categoryName = "Dummy testing category";
 
     cy.get("div")
       .contains(categoryName)

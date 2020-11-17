@@ -56,7 +56,7 @@ const Header = () => {
 };
 
 const LeftSpan = styled.span`
-  color: #17a2b8;
+  color: #99E627;
   font-size: larger;
 `;
 
