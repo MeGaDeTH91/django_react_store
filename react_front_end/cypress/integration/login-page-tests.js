@@ -12,8 +12,7 @@ describe("Login page", () => {
   });
 
   it("Should set auth cookie when logging in!", function () {
-    cy.get("input[name=email]").type("marto@abv.bg");
-
+    cy.get("input[name=username]").type("marto");
     cy.get("input[name=password]").type(`123{enter}`);
 
     cy.wait(5500);
@@ -26,8 +25,7 @@ describe("Login page", () => {
   });
 
   it("Should throw error on attempt with wrong email!", function () {
-    cy.get("input[name=email]").type("wrong");
-
+    cy.get("input[name=username]").type("wrong");
     cy.get("input[name=password]").type(`123{enter}`);
 
     cy.wait(1000);
@@ -39,8 +37,7 @@ describe("Login page", () => {
   });
 
   it("Should throw error on attempt with wrong password!", function () {
-    cy.get("input[name=email]").type("marto@abv.bg");
-
+    cy.get("input[name=username]").type("marto");
     cy.get("input[name=password]").type(`wrongPass{enter}`);
 
     cy.wait(1000);
@@ -52,8 +49,7 @@ describe("Login page", () => {
   });
 
   it("Should logout successfully!", function () {
-    cy.get("input[name=email]").type("marto@abv.bg");
-
+    cy.get("input[name=username]").type("marto");
     cy.get("input[name=password]").type(`123{enter}`);
 
     cy.wait(2500);
@@ -73,6 +69,6 @@ describe("Login page", () => {
 
   it("Should show footer correctly!", () => {
     cy.get("footer").should("be.visible");
-    cy.get("p").contains("React-Store © 2020");
+    cy.get("p").contains("Django-React-Store © 2020");
   });
 });

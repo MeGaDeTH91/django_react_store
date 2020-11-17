@@ -89,6 +89,14 @@ const EditProductPage = () => {
       return;
     }
 
+    if (price <= 0 || quantity <= 0) {
+      notifications.showMessage(
+        "Please provide valid price and quantity.",
+        "danger"
+      );
+      return;
+    }
+
     await executeAuthRequest(
       `http://127.0.0.1:8000/api/products/edit/${params.id}/`,
       "PUT",

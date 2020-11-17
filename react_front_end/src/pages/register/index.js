@@ -24,7 +24,7 @@ const RegisterPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!username || !first_name || !last_name || !password || !rePassword) {
+    if (!username || !first_name || !last_name || !password || !rePassword || password.length < 3 || rePassword.length < 3) {
       notifications.showMessage('Username, full name, password and confirmation password should be more than 2 characters.', 'danger');
       return;
     }
@@ -51,7 +51,7 @@ const RegisterPage = () => {
     });
 
     if (!promise.ok) {
-      notifications.showMessage('Please provide different username.', 'danger');
+      notifications.showMessage('Please fill in all fields correctly.', 'danger');
       return;
     }
 

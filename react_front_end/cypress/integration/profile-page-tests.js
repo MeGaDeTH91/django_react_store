@@ -2,8 +2,7 @@ describe("Profile page", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000/login");
 
-    cy.get("input[name=email]").type("marto1@abv.bg");
-
+    cy.get("input[name=username]").type("marto123");
     cy.get("input[name=password]").type(`123{enter}`);
 
     cy.wait(5500);
@@ -20,8 +19,8 @@ describe("Profile page", () => {
 
   it("Should show all user information correctly!", () => {
     cy.get("h1").contains('Martin Taskov2');
-    cy.get("h3").contains('marto1@abv.bg');
-    cy.get("h3").contains('0012345');
+    cy.get("h3").contains('test@abv.bg');
+    cy.get("h3").contains('Some address');
   });
 
   it("Should show buttons correctly!", () => {
@@ -39,28 +38,31 @@ describe("Profile page", () => {
     cy.get("button").contains('Update info').click();
     cy.wait(300);
 
-    const name = 'Martin Taskov2';
-    const phone = '0012345';
+    const first_name = 'Martin';
+    const last_name = 'Taskov2';
+    const address = 'Some address';
 
-    const tempName = 'Martin Taskov155';
-    const tempPhone = 'no phone';
+    const tempFullName = 'Martin Taskov155';
+    const tempLastName = 'Taskov155';
+    const tempAddress = 'no address';
 
-    cy.get('input[name=fullName]').should('have.value', name);
-    cy.get('input[name=phone]').should('have.value', phone);
+    cy.get('input[name=first_name]').should('have.value', first_name);
+    cy.get('input[name=last_name]').should('have.value', last_name);
+    cy.get('input[name=address]').should('have.value', address);
 
-    cy.get('input[name=fullName]').clear().type(tempName);
-    cy.get('input[name=phone]').clear().type(tempPhone);
+    cy.get('input[name=last_name]').clear().type(tempLastName);
+    cy.get('input[name=address]').clear().type(tempAddress);
     cy.get("button").contains('Update info').click();
     cy.wait(300);
 
-    cy.get("h1").contains(tempName);
-    cy.get("h3").contains(tempPhone);
+    cy.get("h1").contains(tempFullName);
+    cy.get("h3").contains(tempAddress);
     cy.get("button").contains('Update info').click();
     cy.get("div").contains("User information updated successfully!");
     cy.wait(300);
 
-    cy.get('input[name=fullName]').clear().type(name);
-    cy.get('input[name=phone]').clear().type(phone);
+    cy.get('input[name=last_name]').clear().type(last_name);
+    cy.get('input[name=address]').clear().type(address);
     cy.get("button").contains('Update info').click();
   });
 
@@ -68,20 +70,22 @@ describe("Profile page", () => {
     cy.get("button").contains('Update info').click();
     cy.wait(300);
 
-    const name = 'Martin Taskov2';
-    const phone = '0012345';
+    const first_name = 'Martin';
+    const last_name = 'Taskov2';
+    const address = 'Some address';
 
-    const tempName = 'Y';
-    const tempPhone = 'no phone';
+    const tempLastName = ' ';
+    const tempAddress = 'no address';
 
-    cy.get('input[name=fullName]').should('have.value', name);
-    cy.get('input[name=phone]').should('have.value', phone);
+    cy.get('input[name=first_name]').should('have.value', first_name);
+    cy.get('input[name=last_name]').should('have.value', last_name);
+    cy.get('input[name=address]').should('have.value', address);
 
-    cy.get('input[name=fullName]').clear().type(tempName);
-    cy.get('input[name=phone]').clear().type(tempPhone);
+    cy.get('input[name=last_name]').clear().type(tempLastName);
+    cy.get('input[name=address]').clear().type(tempAddress);
     cy.get("button").contains('Update info').click();
     
-    cy.get("div").contains("Error occured: Full name should be at least 3 characters long!");
+    cy.get("div").contains("Error occured: Please provide valid data.");
     cy.url().should("eq", "http://localhost:3000/profile-details");
   });
 
@@ -89,9 +93,9 @@ describe("Profile page", () => {
     cy.get("button").contains('My orders').click();
 
     cy.get("h4").contains('Orders history');
-    cy.get("div").contains('5f33025b60a2071d80188f2c');
-    cy.get("div").contains('5f32e9e6ae56dc07d0773c43');
-    cy.get("div").contains('5f32e5997ad2543c801cb799');
+    cy.get("div").contains('8');
+    cy.get("div").contains('7');
+    cy.get("div").contains('6');
   });
 
   it("Should leave review successfully!", () => {
@@ -125,7 +129,7 @@ describe("Profile page", () => {
 
   it("Should show footer correctly!", () => {
     cy.get("footer").should("be.visible");
-    cy.get('p').contains('React-Store © 2020');
+    cy.get('p').contains('Django-React-Store © 2020');
   });
 
   function reviewID_generate() {

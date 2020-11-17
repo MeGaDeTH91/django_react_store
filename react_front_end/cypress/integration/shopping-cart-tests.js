@@ -2,8 +2,7 @@ describe("Shopping cart page", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000/login");
 
-    cy.get("input[name=email]").type("marto1@abv.bg");
-
+    cy.get("input[name=username]").type("marto123");
     cy.get("input[name=password]").type(`123{enter}`);
 
     cy.wait(5500);
@@ -89,6 +88,6 @@ describe("Shopping cart page", () => {
 
   it("Should show footer correctly!", () => {
     cy.get("footer").should("be.visible");
-    cy.get("p").contains("React-Store © 2020");
+    cy.get("p").contains("Django-React-Store © 2020");
   });
 });

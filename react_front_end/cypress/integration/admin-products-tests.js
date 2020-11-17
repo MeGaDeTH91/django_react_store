@@ -2,9 +2,9 @@ describe("Admin Products management pages", () => {
   beforeEach(() => {
     cy.visit("http://localhost:3000/login");
 
-    cy.get("input[name=email]").type("marto@abv.bg");
-
+    cy.get("input[name=username]").type("marto");
     cy.get("input[name=password]").type(`123{enter}`);
+
     cy.get('button').contains('Login').click();
 
     cy.wait(6500);
@@ -73,7 +73,7 @@ describe("Admin Products management pages", () => {
     cy.wait(6500);
     cy.url().should("eq", "http://localhost:3000/products/create");
 
-    cy.get("input[name=title]").type("T");
+    cy.get("input[name=title]").type(" ");
     cy.get("textarea[name=description]").type(
       "One of the best dummy products on the market."
     );
@@ -106,7 +106,7 @@ describe("Admin Products management pages", () => {
 
     const currentProduct = productID_generate();
     cy.get("input[name=title]").type(currentProduct);
-    cy.get("textarea[name=description]").type("G");
+    cy.get("textarea[name=description]").type(" ");
     cy.wait(300);
 
     cy.get("input[name=imageURL").type(
@@ -365,7 +365,7 @@ describe("Admin Products management pages", () => {
 
   it("Should show footer correctly!", () => {
     cy.get("footer").should("be.visible");
-    cy.get("p").contains("React-Store © 2020");
+    cy.get("p").contains("Django-React-Store © 2020");
   });
 
   function productID_generate() {
