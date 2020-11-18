@@ -18,7 +18,9 @@ DATABASE_USER={specify PostgreSQL database user}<br>
 DATABASE_PASSWORD={specify PostgreSQL database password}<br>
 DATABASE_HOST={specify PostgreSQL database host}<br>
 DATABASE_PORT={specify PostgreSQL database port}<br>
-Then configure Python environment. In project root folder - ('python manage.py runserver').catch(check your internet connection :) ). This will start the REST API on
+Then configure Python environment:<br> 
+You can do this using PyCharm or similar software and just hit 'Run' button<br>or<br>
+configure with command line and after that go in project root folder - ('python manage.py runserver').catch(check your internet connection :) ). This will start the REST API on
 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 Next, in the 'react_front_end' folder, in separate command-line window run 'npm install' and 'npm start' command and
 this will start the React app on  [http://localhost:3000/](http://localhost:3000/)
