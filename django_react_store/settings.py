@@ -30,7 +30,7 @@ SECRET_KEY = env("SECRET_KEY")
 
 JWT_AUTH = {
     'JWT_AUTH_HEADER_PREFIX': 'JWT',
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=3),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=3),
     'JWT_RESPONSE_PAYLOAD_HANDLER': 'main_app.utils.my_jwt_response_handler'
 }
 

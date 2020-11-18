@@ -15,14 +15,14 @@
 .container {
     text-align: center;
     background-color: #fcffbf;
-    height: auto;
+    height: 135vh;
     box-shadow: 0 50vh 0 50vh #fdfaf4;
 }
 
 .inner-container {
     display: inline-block;
-    width: 88%;
+    width: 100%;
     height: auto;
+    background-color: #fcffbf;
     /* border:1px solid blue; */
-    margin-bottom: 5%;
 }
