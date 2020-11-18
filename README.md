@@ -41,5 +41,5 @@ The REST API is hosted also on [Heroku](https://www.heroku.com) and can be found
 1. Public part:<br> 
     * Guest users can access home page with all products listed with reviews section, page with listed categories so user can browse products by category, register, login pages and search by title option.<br>
 2. Private part:<br>
-    * Standard user – can access all public functionalities plus adding products to shopping cart, viewing and removing products from shopping cart, finalizing order and viewing  recent orders history, exploring and update of profile details. User is able to share product feedback by writing reviews.
+    * Standard user – can access all public functionalities plus adding products to shopping cart, viewing and removing products from shopping cart, finalizing order and viewing  recent orders history, exploring and update of profile details. User is able to share product feedback by writing reviews and recent reviews can be seen in Profile.
     * Administrator – can access all functionalities, which standart user is able to, plus adding, editing and removing products, also adding and editing categories. Administrators can manage users and give administrative privileges or ban(deactivate) user accounts.
