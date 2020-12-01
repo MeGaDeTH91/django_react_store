@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from main_app.views.common import get_favicon
+
 urlpatterns = [
+    path(r'favicon.ico', get_favicon),
     path('admin/', admin.site.urls),
     path('api/', include('main_app.urls'))
 ]
