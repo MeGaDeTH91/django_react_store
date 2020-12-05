@@ -39,15 +39,4 @@ urlpatterns = [
     path('orders/create/', ProfileOrders.as_view(), name='orders-create'),
     path('orders/add-to-cart/<int:pk>/', ProfileShoppingCart.as_view(), name='add-product-to-cart'),
     path('orders/remove-from-cart/<int:pk>/', ProfileShoppingCart.as_view(), name='remove-product-from-cart'),
-
-    # # Expense pages
-    # path('create/', expenses.expense_create, name='create expense'),
-    # path('edit/<int:pk>', expenses.expense_edit, name='edit expense'),
-    # path('delete/<int:pk>', expenses.expense_delete, name='delete expense'),
-    #
-    # # Profile pages
-    # path('profile/', profiles.profile_details, name='profile details'),
-    # path('profile/create/', profiles.profile_create, name='create profile'),
-    # path('profile/edit/', profiles.profile_edit, name='edit profile'),
-    # path('profile/delete/', profiles.profile_delete, name='delete profile'),
 ]
